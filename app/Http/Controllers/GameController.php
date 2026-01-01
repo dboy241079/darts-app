@@ -59,6 +59,7 @@ class GameController extends Controller
         $startingSeat = (int)$data['starting_seat'];
 
         $state = [
+            'leg_starting_seat' => $startingSeat,
             'set_no' => 1,
             'leg_no_in_set' => 1,
             'sets' => [1 => 0, 2 => 0],
@@ -100,5 +101,17 @@ class GameController extends Controller
 
         $game->load('players');
         return view('games.show', compact('game'));
+
+        $turns = $game->turns()->orderBy('turn_no', 'desc')->take(20)->get()->reverse();
+return view('games.show', compact('game', 'turns'));
+
+        $game->load('players');
+
+// letzte 30 turns reichen fürs UI
+$turns = $game->turns()->orderBy('turn_no', 'desc')->take(30)->get();
+
+return view('games.show', compact('game', 'turns'));
+
+
     }
 }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\TurnController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
     Route::post('/games', [GameController::class, 'store'])->name('games.store');
     Route::get('/games/{game}', [GameController::class, 'show'])->name('games.show');
+    Route::post('/games/{game}/turns', [TurnController::class, 'store'])->name('games.turns.store');
+
 });
 
 

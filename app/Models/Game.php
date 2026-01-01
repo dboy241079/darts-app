@@ -21,5 +21,9 @@ class Game extends Model
     {
         return $this->hasMany(GamePlayer::class);
     }
+    public function turns()
+{
+    return $this->hasMany(\App\Models\Turn::class);
+}
 }
 
